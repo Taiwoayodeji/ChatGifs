@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Form = styled.form`
   background-color: white;
-  padding: 2.5rem;
+  padding: 1.5rem;
   border-radius: 20px;
   width: 100%;
   max-width: 400px;
@@ -23,9 +23,9 @@ const Form = styled.form`
 `;
 
 const Title = styled.div`
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   text-align: center;
   color: #1d1d1f;
   display: flex;
@@ -37,12 +37,39 @@ const Title = styled.div`
 const Subtitle = styled.p`
   text-align: center;
   color: #86868b;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
 `;
 
 const InputGroup = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+`;
+
+const PasswordInputGroup = styled(InputGroup)`
+  position: relative;
+`;
+
+const PasswordToggle = styled.button`
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #86868b;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: 0.5rem;
+  
+  &:hover {
+    color: #1d1d1f;
+  }
 `;
 
 const Label = styled.label`
@@ -54,13 +81,13 @@ const Label = styled.label`
 
 const Input = styled.input`
   width: 100%;
-  padding: 0.875rem;
-  margin-bottom: 0.5rem;
+  padding: 0.625rem;
+  margin-bottom: 0.25rem;
   border: 1px solid #d2d2d7;
   border-radius: 12px;
   background-color: #ffffff;
   color: #1d1d1f;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: all 0.2s;
   
   &:focus {
@@ -72,16 +99,16 @@ const Input = styled.input`
 
 const Button = styled.button`
   width: 100%;
-  padding: 0.875rem;
+  padding: 0.625rem;
   background-color: #0071e3;
   color: white;
   border: none;
   border-radius: 12px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   
   &:hover {
     background-color: #0077ED;
@@ -94,9 +121,9 @@ const Button = styled.button`
 
 const SwitchText = styled.p`
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
   color: #86868b;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 `;
 
 const Link = styled.span`
@@ -142,6 +169,7 @@ const SignIn: React.FC<SignInProps> = ({ onSwitchToSignUp }) => {
   const { signIn, error: authError, isLoading } = useApp();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -182,24 +210,35 @@ const SignIn: React.FC<SignInProps> = ({ onSwitchToSignUp }) => {
           />
         </InputGroup>
         
-        <InputGroup>
+        <PasswordInputGroup>
           <Label>Password 🔒</Label>
           <Input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             disabled={isLoading}
           />
-        </InputGroup>
+          <PasswordToggle
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            disabled={isLoading}
+          >
+            {showPassword ? "👁️" : "🔒"}
+          </PasswordToggle>
+        </PasswordInputGroup>
         
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Signing in...' : 'Sign In ➡️'}
+          {isLoading ? 'Signing in...' : 'Sign In ✨'}
         </Button>
         <SwitchText>
           New here? {' '}
           <Link onClick={onSwitchToSignUp}>Create an account ✨</Link>
+        </SwitchText>
+        <SwitchText>
+          Forgot password? {' '}
+          <Link onClick={() => {}}>Reset here 🔄</Link>
         </SwitchText>
       </Form>
     </Container>

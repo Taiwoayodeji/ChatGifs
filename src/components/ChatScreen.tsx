@@ -1588,7 +1588,7 @@ const ChatScreen: React.FC = () => {
         updateUserOnlineStatus(user.id, false);
       };
     }
-  }, [user?.id, friends]); // Add proper dependencies
+  }, [user?.id]); // Remove friends from dependencies
 
   // Optimize the processQueue function
   const processQueue = useCallback(() => {
@@ -1605,7 +1605,7 @@ const ChatScreen: React.FC = () => {
   useEffect(() => {
     const queueInterval = setInterval(processQueue, statusDebounceTime);
     return () => clearInterval(queueInterval);
-  }, [processQueue, statusDebounceTime]); // Add proper dependencies
+  }, []); // Remove dependencies since processQueue is stable
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -1676,7 +1676,7 @@ const ChatScreen: React.FC = () => {
         console.error('Error cleaning up message listener:', error);
       }
     };
-  }, [handleNewMessage]); // Add proper dependency
+  }, []); // Remove handleNewMessage from dependencies
 
   // Move handleNewGifMessage outside of useEffect
   const handleNewGifMessage = useCallback((newMessage: Message) => {
@@ -1714,7 +1714,7 @@ const ChatScreen: React.FC = () => {
         console.error('Error cleaning up message listener:', error);
       }
     };
-  }, [handleNewGifMessage]); // Add proper dependency
+  }, []); // Remove handleNewGifMessage from dependencies
 
   const handleSelectGif = useCallback((gif: GiphyGif) => {
     setSelectedGif(gif);
@@ -2170,7 +2170,7 @@ const ChatScreen: React.FC = () => {
     return () => {
       clearInterval(refreshInterval);
     };
-  }, [user, loadRecentChats]); // Add proper dependencies
+  }, [user?.id]); // Only depend on user.id
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

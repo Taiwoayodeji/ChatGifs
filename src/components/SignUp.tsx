@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const Form = styled.form`
   background-color: white;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 20px;
   width: 100%;
   max-width: 400px;
@@ -70,11 +70,33 @@ const InputRow = styled.div`
 `;
 
 const InputGroup = styled.div`
-  margin-bottom: 0.75rem;
-  flex: 1;
+  margin-bottom: 1rem;
+  position: relative;
+`;
+
+const PasswordInputGroup = styled(InputGroup)`
+  position: relative;
+`;
+
+const PasswordToggle = styled.button`
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #86868b;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: 0.5rem;
   
-  &:last-of-type {
-    margin-bottom: 1rem;
+  &:hover {
+    color: #1d1d1f;
   }
 `;
 
@@ -88,7 +110,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.625rem;
   margin-bottom: 0.25rem;
   border: 1px solid #d2d2d7;
   border-radius: 12px;
@@ -106,7 +128,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.625rem;
   background-color: #0071e3;
   color: white;
   border: none;
@@ -115,7 +137,7 @@ const Button = styled.button`
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   
   &:hover {
     background-color: #0077ED;
@@ -128,7 +150,7 @@ const Button = styled.button`
 
 const SwitchText = styled.p`
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: #86868b;
   font-size: 0.9rem;
 `;
@@ -178,6 +200,8 @@ const SignUp: React.FC<SignUpProps> = ({ onSwitchToSignIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -259,29 +283,43 @@ const SignUp: React.FC<SignUpProps> = ({ onSwitchToSignIn }) => {
           />
         </InputGroup>
         
-        <InputGroup>
+        <PasswordInputGroup>
           <Label>Password 🔒</Label>
           <Input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Create a password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             disabled={isLoading}
           />
-        </InputGroup>
-
-        <InputGroup>
-          <Label>Confirm Password 🔐</Label>
+          <PasswordToggle
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            disabled={isLoading}
+          >
+            {showPassword ? "👁️" : "🔒"}
+          </PasswordToggle>
+        </PasswordInputGroup>
+        
+        <PasswordInputGroup>
+          <Label>Confirm Password 🔒</Label>
           <Input
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm your password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
             disabled={isLoading}
           />
-        </InputGroup>
+          <PasswordToggle
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            disabled={isLoading}
+          >
+            {showConfirmPassword ? "👁️" : "🔒"}
+          </PasswordToggle>
+        </PasswordInputGroup>
         
         <Button type="submit" disabled={isLoading}>
           {isLoading ? 'Creating account...' : 'Sign Up ✨'}
