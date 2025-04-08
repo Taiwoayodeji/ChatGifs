@@ -1,46 +1,132 @@
-# Getting Started with Create React App
+# ChatGifs - Real-time Chat Application with GIF Support
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ChatGifs is a modern real-time chat application that allows users to communicate through text messages and GIFs. Built with React, TypeScript, and Firebase, it offers a seamless and interactive messaging experience.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Authentication
+- User registration with email and password
+- User login with existing credentials
+- Protected routes for authenticated users
+- Account deactivation functionality
 
-### `npm start`
+### Friend Management
+- Send friend requests to other users
+- Accept or reject incoming friend requests
+- View list of current friends
+- Remove friends from friends list
+- Real-time friend request notifications
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Chat Functionality
+- Real-time messaging with friends
+- Support for both text messages and GIFs
+- Last message preview in chat list
+- Unread message indicators
+- "New ChatGif" indicator for new GIF messages
+- Online/Offline status indicators for friends
+- Message timestamps
+- Auto-scroll to latest messages
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### GIF Integration
+- Search GIFs using GIPHY API
+- Trending GIFs section
+- Send GIFs directly in chat
+- Preview GIFs before sending
+- Optimized GIF loading and display
 
-### `npm test`
+### User Interface
+- Modern and responsive design
+- Dark/Light theme support
+- Clean and intuitive navigation
+- Loading states and error handling
+- Real-time updates across all components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## User Flows
 
-### `npm run build`
+### Authentication Flow
+1. User arrives at the application
+2. Chooses to Sign Up or Sign In
+3. If signing up:
+   - Enters email and password
+   - Creates new account
+   - Gets redirected to main chat screen
+4. If signing in:
+   - Enters credentials
+   - Gets redirected to main chat screen
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Friend Management Flow
+1. User can search for friends
+2. Send friend request
+3. Recipient receives friend request notification
+4. Recipient can:
+   - Accept request (adds both users as friends)
+   - Reject request (removes request)
+5. Once friends, users can:
+   - Start new chats
+   - Remove friendship
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Messaging Flow
+1. User selects a friend from the chat list
+2. Opens chat window with selected friend
+3. Can send:
+   - Text messages
+   - GIFs from GIPHY
+4. Messages appear in real-time
+5. Unread messages are indicated
+6. New GIFs show "New ChatGif" indicator
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### GIF Sharing Flow
+1. User clicks "Send GIF" button
+2. Opens GIF selection modal
+3. Can:
+   - Browse trending GIFs
+   - Search for specific GIFs
+4. Select GIF to send
+5. GIF appears in chat immediately
+6. Recipient sees "New ChatGif" indicator
 
-### `npm run eject`
+### Account Management Flow
+1. User can access account settings
+2. View profile information
+3. Deactivate account:
+   - Confirmation required
+   - Removes all user data
+   - Deletes authentication record
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Technical Implementation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Built with React and TypeScript
+- Firebase Realtime Database for real-time features
+- Firebase Authentication for user management
+- GIPHY API integration for GIF support
+- Styled-components for theming and styling
+- Context API for state management
+- Custom hooks for shared logic
+- Debounced API calls for performance
+- Optimized re-renders and updates
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Getting Started
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up Firebase configuration
+4. Add GIPHY API key
+5. Start the development server: `npm start`
 
-## Learn More
+## Environment Variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create a `.env` file with the following:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+REACT_APP_FIREBASE_API_KEY=your_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+REACT_APP_FIREBASE_APP_ID=your_app_id
+REACT_APP_GIPHY_API_KEY=your_giphy_api_key
+```
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
