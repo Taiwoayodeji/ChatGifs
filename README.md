@@ -69,7 +69,6 @@ ChatGifs is a modern real-time chat application that allows users to communicate
 1. User selects a friend from the chat list
 2. Opens chat window with selected friend
 3. Can send:
-   - Text messages
    - GIFs from GIPHY
 4. Messages appear in real-time
 5. Unread messages are indicated
