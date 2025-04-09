@@ -1,6 +1,6 @@
 # ChatGifs - Real-time Chat Application with GIF Support
 
-ChatGifs is a modern real-time chat application that allows users to communicate through text messages and GIFs. Built with React, TypeScript, and Firebase, it offers a seamless and interactive messaging experience.
+ChatGifs is a modern real-time chat application that allows users to communicate GIFs. Built with React, TypeScript, and Firebase, it offers a seamless and interactive messaging experience.
 
 ## Features
 
